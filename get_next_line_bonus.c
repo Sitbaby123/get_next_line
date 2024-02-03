@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-ketb <mal-ketb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 14:46:28 by mansoor           #+#    #+#             */
-/*   Updated: 2024/02/03 20:47:50 by mal-ketb         ###   ########.fr       */
+/*   Created: 2024/02/02 17:20:47 by mal-ketb          #+#    #+#             */
+/*   Updated: 2024/02/03 21:15:40 by mal-ketb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*read_file(int fd,char *s)
+char *read_file(int fd, char *s)
 {
-	char	*buff;
-	int		len;
+	char *buff;
+	int len;
 
 	buff = malloc((size_t)BUFFER_SIZE + 1 * (sizeof(char)));
 	if (!buff)
@@ -36,48 +36,45 @@ char	*read_file(int fd,char *s)
 	free(buff);
 	return (s);
 }
-
-char    *getting_line(char *str)
+char *getting_line(char *str)
 {
-	int		i;
-	char	*line_new;
+	char *new_line;
+	int i;
 
 	i = 0;
 	if (!str[i])
 		return (NULL);
-	while (str[i] && str[i] != '\n')
+	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	line_new = (char *)malloc(sizeof(char) * (i + 2));
-	if (!line_new)
+	new_line = (char *)malloc(sizeof(char) * (i + 2));
+	if (!new_line)
 		return (NULL);
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i] != '\0' && str[i] != '\n')
 	{
-		line_new[i] = str[i];
+		new_line[i] = str[i];
 		i++;
 	}
 	if (str[i] == '\n')
 	{
-		line_new[i] = str[i];
+		new_line[i] = str[i];
 		i++;
 	}
-	line_new[i] = '\0';
-	return (line_new);
+	new_line[i] = '\0';
+	return (new_line);
 }
 
-
-char    *get_next_line(int fd)
+char *get_next_line(int fd)
 {
-    char        *line;
-    static char *buff;
+	char *line;
+	static char *buff[1024];
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
-        return (NULL);
-    buff = read_file(fd, buff);
-    if (!buff)
-        return (NULL);
-    line = getting_line(buff);
-    buff = remain(buff);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buff[fd] = read_file(fd, buff[fd]);
+	if (!buff[fd])
+		return (NULL);
+	line = getting_line(buff[fd]);
+	buff[fd] = remain(buff[fd]);
 	return (line);
-
 }
