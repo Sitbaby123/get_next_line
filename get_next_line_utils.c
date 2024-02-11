@@ -6,10 +6,9 @@
 /*   By: mal-ketb <mal-ketb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:58:36 by mansoor           #+#    #+#             */
-/*   Updated: 2024/02/03 20:08:00 by mal-ketb         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:14:46 by mal-ketb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 
@@ -76,6 +75,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	free(s1);
 	return (strj);
 }
+
 char	*remain(char *full_buffer)
 {
 	int		i;

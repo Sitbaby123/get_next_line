@@ -6,7 +6,7 @@
 /*   By: mal-ketb <mal-ketb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:25:58 by mal-ketb          #+#    #+#             */
-/*   Updated: 2024/02/03 21:06:29 by mal-ketb         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:21:57 by mal-ketb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	free(s1);
 	return (strj);
 }
+
 char	*remain(char *full_buffer)
 {
 	int		i;

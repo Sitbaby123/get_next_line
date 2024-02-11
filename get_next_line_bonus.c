@@ -6,16 +6,16 @@
 /*   By: mal-ketb <mal-ketb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:20:47 by mal-ketb          #+#    #+#             */
-/*   Updated: 2024/02/03 21:15:40 by mal-ketb         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:14:23 by mal-ketb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char *read_file(int fd, char *s)
+char	*read_file(int fd, char *s)
 {
-	char *buff;
-	int len;
+	char	*buff;
+	int		len;
 
 	buff = malloc((size_t)BUFFER_SIZE + 1 * (sizeof(char)));
 	if (!buff)
@@ -36,10 +36,11 @@ char *read_file(int fd, char *s)
 	free(buff);
 	return (s);
 }
-char *getting_line(char *str)
+
+char	*extracting_line(char *str)
 {
-	char *new_line;
-	int i;
+	char	*new_line;
+	int		i;
 
 	i = 0;
 	if (!str[i])
@@ -64,17 +65,17 @@ char *getting_line(char *str)
 	return (new_line);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *line;
-	static char *buff[1024];
+	char		*line;
+	static char	*buff[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buff[fd] = read_file(fd, buff[fd]);
 	if (!buff[fd])
 		return (NULL);
-	line = getting_line(buff[fd]);
+	line = extracting_line(buff[fd]);
 	buff[fd] = remain(buff[fd]);
 	return (line);
 }
